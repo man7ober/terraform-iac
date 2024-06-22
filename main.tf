@@ -126,7 +126,7 @@ resource "aws_instance" "my-instance" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh-key.key_name
 
-  user_data = file("script.sh")
+  user_data = file("entry-script.sh")
 
   tags = {
     Name = "${var.env_prefix}-instance"
