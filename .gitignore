@@ -1,0 +1,19 @@
+# local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# exclude var files
+*.tfvars
+
+# aws credentials
+*.csv
+
+# course
+whereami.txt
