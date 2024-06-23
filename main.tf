@@ -7,6 +7,7 @@ variable "avail_zone" {}
 variable "env_prefix" {}
 variable "instance_type" {}
 variable "public_key_location" {}
+variable "private_key_location" {}
 
 # define cloud provider
 provider "aws" {
@@ -101,7 +102,7 @@ data "aws_ami" "latest-amazon-image" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-kernel-*-x86_64-gp2"]
+    values = ["al2023-ami-*-x86_64"]
   }
 
   filter {
@@ -126,14 +127,34 @@ resource "aws_instance" "my-instance" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh-key.key_name
 
-  user_data = file("entry-script.sh")
+  # make connection to ec2 instance
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ec2-user"
+    private_key = file(var.private_key_location)
+  }
+
+  # type 1 - connect via ssh using terraform
+  provisioner "remote-exec" {
+    script = "entry-script.sh"
+  }
+
+  # type 2 - locally executes
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} > output.txt"
+  }
+
+  # type 3 - copy files / dir from local to remote
+  provisioner "file" {
+    source      = "entry-script.sh"
+    destination = "/home/ec2-user/entry-script-ec2.sh"
+  }
 
   tags = {
     Name = "${var.env_prefix}-instance"
   }
 }
-
-# 
 
 # console aws ids
 output "aws-ids" {
