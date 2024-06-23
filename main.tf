@@ -101,7 +101,7 @@ data "aws_ami" "latest-amazon-image" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-kernel-*-x86_64-gp2"]
+    values = ["al2023-ami-*-x86_64"]
   }
 
   filter {
