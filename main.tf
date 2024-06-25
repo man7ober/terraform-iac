@@ -8,6 +8,16 @@ variable "env_prefix" {}
 variable "instance_type" {}
 variable "public_key_location" {}
 
+# define remote storage
+terraform {
+  required_version = ">= 0.12"
+  backend "s3" {
+    bucket = "man7ober-bucket"
+    key    = "terraform/state.tfstate"
+    region = "ap-south-1"
+  }
+}
+
 # define cloud provider
 provider "aws" {
   region     = "ap-south-1"
@@ -132,8 +142,6 @@ resource "aws_instance" "my-instance" {
     Name = "${var.env_prefix}-instance"
   }
 }
-
-# 
 
 # console aws ids
 output "aws-ids" {
