@@ -27,9 +27,10 @@
 
 **terraform state**
 
-- used to slice and dice the Terraform state
+- used to check the Terraform state
 
 ## Flags :
 
 - auto-approve
 - target
+- migrate-state
