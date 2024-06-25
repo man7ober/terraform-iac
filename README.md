@@ -34,3 +34,14 @@
 - auto-approve
 - target
 - migrate-state
+
+## Best Practices :
+
+- Manipulate state only through TF commands
+- Always set up a shared remote state
+- Use state locking
+- Back up your state files
+- Use 1 state per environment
+- Host TF scripts in git repository
+- CI for TF code
+- Apply TF only through CD pipeline
