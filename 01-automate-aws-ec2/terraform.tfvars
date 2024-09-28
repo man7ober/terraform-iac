@@ -1,0 +1,8 @@
+access_key          = "AKIATNXWEV2GJM34HPPO"
+secret_key          = "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"
+vpc_cidr_block      = "10.0.0.0/16"
+subnet_cidr_block   = "10.0.10.0/24"
+avail_zone          = "ap-south-1b"
+env_prefix          = "dev"
+instance_type       = "t2.micro"
+public_key_location = "C:/Users/Mayank-PC/.ssh/id_rsa.pub"
